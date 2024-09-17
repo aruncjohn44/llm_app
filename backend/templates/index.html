@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM RAG Application</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  </head>
+  <body>
+    <div class="container mt-5">
+      <header class="text-center mb-4">
+        <h1 class="display-4">LLM RAG Application</h1>
+        <p class="lead">
+          Generate responses using an LLM with flexible settings
+        </p>
+      </header>
+
+      <section class="input-section">
+        <form id="rag-form">
+          <div class="mb-4">
+            <label for="prompt" class="form-label">Enter your prompt:</label>
+            <textarea
+              id="prompt"
+              class="form-control"
+              rows="5"
+              placeholder="Type your prompt here..."
+              required
+            ></textarea>
+          </div>
+
+          <div class="mb-4">
+            <label for="temperature" class="form-label">LLM Temperature:</label>
+            <input
+              type="range"
+              id="temperature"
+              class="form-range"
+              min="0.0"
+              max="1.0"
+              step="0.1"
+              value="0.7"
+              oninput="this.nextElementSibling.value = this.value"
+            />
+            <output class="ms-2">0.7</output>
+          </div>
+
+          <div class="mb-4">
+            <label for="model" class="form-label">Select LLM Model:</label>
+            <select id="model" class="form-select">
+              <option value="gpt-4">GPT-4</option>
+              <option value="gpt-4-turbo">GPT-4 Turbo</option>
+              <option value="openai-gpt3">GPT-3</option>
+              <option value="custom-llm">Custom Model</option>
+            </select>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg w-100">
+              Generate Response
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <section class="output-section mt-5">
+        <h2 class="text-center mb-3">Generated Response:</h2>
+        <div id="response-box" class="border rounded p-4 bg-light">
+          <!-- Generated content will appear here -->
+        </div>
+      </section>
+    </div>
+
+    <footer class="text-center mt-5">
+      <p>&copy; 2024 LLM RAG Application</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript -->
+    <script src="{{url_for('static', filename='index.js')}}"></script>
+  </body>
+</html>

@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template
-import openai
+import openai, pandas as pd
 
 app = Flask(__name__)
 
@@ -34,4 +34,4 @@ def generate():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
