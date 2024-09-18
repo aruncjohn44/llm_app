@@ -15,23 +15,29 @@ def index():
 @app.route('/generate', methods=['POST'])
 def generate():
     data = request.get_json()
+    print(data)
     prompt = data['prompt']
     temperature = float(data['temperature'])
     model = data['model']
 
-    try:
-        response = openai.Completion.create(
-            engine=model,
-            prompt=prompt,
-            temperature=temperature,
-            max_tokens=150
-        )
-        result = response.choices[0].text.strip()
 
-        return jsonify({"response": result})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    # try:
+    #     response = openai.Completion.create(
+    #         engine=model,
+    #         prompt=prompt,
+    #         temperature=temperature,
+    #         max_tokens=150
+    #     )
+    #     result = response.choices[0].text.strip()
+
+    #     return jsonify({"response": result})
+    # except Exception as e:
+    #     print('#####-------  ', e, '  ----##############')
+    #     return jsonify({"error": str(e)}), 500
+
+    # Trial response
+    return jsonify({"response": f"Here are the parameters you entered Temp: {temperature}, model: {model}"})
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
