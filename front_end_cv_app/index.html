@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CV vs Job Description Matcher</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CV vs Job Description Matcher</h1>
+            <p>Upload your CV and paste the Job Description to compare and improve your CV for a specific role.</p>
+        </header>
+        
+        <section class="input-section">
+            <div class="form-group">
+                <label for="cvUpload">Upload CV</label>
+                <input type="file" id="cvUpload" name="cvUpload" accept=".pdf,.doc,.docx">
+            </div>
+            <div class="form-group">
+                <label for="jobDescription">Job Description</label>
+                <textarea id="jobDescription" name="jobDescription" rows="8" placeholder="Paste job description here"></textarea>
+            </div>
+            <button id="submitBtn">Compare CV with JD</button>
+        </section>
+
+        <section class="results-section">
+            <div id="matchScore" class="result-block">
+                <h3>Match Score:</h3>
+                <p>85%</p>
+            </div>
+            <div id="missingKeywords" class="result-block">
+                <h3>Missing Keywords:</h3>
+                <ul>
+                    <li>Python</li>
+                    <li>Data Pipelines</li>
+                    <li>Model Deployment</li>
+                </ul>
+            </div>
+            <div id="improvementSuggestions" class="result-block">
+                <h3>Improvement Suggestions:</h3>
+                <p>Consider emphasizing your experience with deploying machine learning models and cloud technologies like AWS or Azure.</p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 CV Matcher App</p>
+    </footer>
+<script>src="index.js"</script>
+</body>
+</html>
