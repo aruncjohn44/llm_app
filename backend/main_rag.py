@@ -9,7 +9,7 @@ openai.api_key = 'your-openai-api-key'
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index_rag.html')
 
 
 @app.route('/generate', methods=['POST'])

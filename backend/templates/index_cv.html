@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CV vs Job Description Matcher</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_cv.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon_cv.ico') }}">
 </head>
 <body>
     <div class="container">
@@ -49,6 +50,6 @@
     <footer>
         <p>&copy; 2024 CV Matcher App</p>
     </footer>
-<script>src="index.js"</script>
+<script src="{{url_for('static', filename='index_cv.js')}}"></script>
 </body>
 </html>
