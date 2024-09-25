@@ -1,0 +1,28 @@
+```json
+{
+    "required skills": [
+        "Machine Learning",
+        "Deep Learning",
+        "AI techniques",
+        "Data extraction",
+        "Data analysis",
+        "Data cleaning",
+        "Data preparation",
+        "Data modeling",
+        "Data evaluation",
+        "Scientific communication",
+        "Curiosity",
+        "Critical thinking",
+        "Hacking skills",
+        "Scientific reasoning"
+    ],
+    "education details": [
+        "Ph.D. in relevant areas",
+        "Master’s in computer science or quantitative field"
+    ],
+    "required experience": [
+        "Proven experience in developing and deploying Machine learning and Deep learning solutions end-to-end (data exploration to deployment)"
+    ],
+    "certifications": []
+}
+```

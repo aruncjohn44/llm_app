@@ -3,8 +3,11 @@ from werkzeug.utils import secure_filename
 import os, json
 import PyPDF2
 import docx
+import ast
 from cv_analyzer import extract_resume_info, extract_jobdesc_info
+from utils import create_hash, check_file_exists, save_to_cache, read_from_file
 
+CACHE_DIR = 'doctemp'
 app = Flask(__name__)
 
 # Configurations
@@ -18,7 +21,6 @@ if not os.path.exists(app.config['UPLOAD_FOLDER']):
 # Helper function to check allowed file extensions
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
-
 
 # Function to extract text from PDF
 def extract_text_from_pdf(pdf_path):
@@ -65,14 +67,27 @@ def compare_cv():
     else:
         return jsonify({"error": "Invalid file format"}), 400
     
-    resume_info = extract_resume_info(cv_text)
-    job_description_info = extract_jobdesc_info(job_description)
+    # check cache
+    hash_text_jd = create_hash(job_description)
+    hash_filename = hash_text_jd + '.txt'
+    filename = filename + '.txt'
+
+    if check_file_exists(CACHE_DIR, filename) and check_file_exists(CACHE_DIR, hash_filename):
+        resume_info = read_from_file(CACHE_DIR, filename).replace('json', '').replace('```', '')
+        job_description_info = read_from_file(CACHE_DIR, hash_filename).replace('json', '').replace('```', '')
+    else:
+        resume_info = extract_resume_info(cv_text).replace('json', '').replace('```', '')
+        job_description_info = extract_jobdesc_info(job_description).replace('```', '')
+
+        save_to_cache(filename, resume_info, CACHE_DIR).replace('json', '')
+        save_to_cache(hash_filename, job_description_info, CACHE_DIR)
+
+    print(resume_info)
+    print(job_description_info)
 
     resume_json = json.loads(resume_info)
-    jd_json = json.loads(resume_info)
+    jd_json = json.loads(job_description_info)
 
-    print(resume_json)
-    print(jd_json)
     # Placeholder for integrating LLM-based logic to compare CV with JD
     # Here you'd load the CV content, compare with job description using LLM, etc.
     # Example dummy response:
