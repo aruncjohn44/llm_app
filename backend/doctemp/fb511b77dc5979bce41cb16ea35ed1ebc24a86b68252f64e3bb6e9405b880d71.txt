@@ -1,0 +1,29 @@
+{
+    "required skills": [
+        "leadership",
+        "stakeholder management",
+        "data engineering",
+        "AI technologies",
+        "business strategy",
+        "innovation",
+        "project management",
+        "customer engagement",
+        "team mentorship"
+    ],
+    "required tools": [
+        "Python",
+        "SQL",
+        "TensorFlow",
+        "pandas"
+    ],
+    "required experience": [
+        "proven experience in leading Data & Artificial Intelligence teams and projects",
+        "strong background in Data Engineering and AI Technologies",
+        "demonstrated ability to innovate and stay ahead of industry trends in Data & AI",
+        "ability to manage team operations and financials"
+    ],
+    "education details": [
+        "highest educational qualification in a related field"
+    ],
+    "certifications": []
+}

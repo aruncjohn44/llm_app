@@ -27,18 +27,27 @@
             <button id="submitBtn">Compare CV with JD</button>
         </section>
 
+        <div id="loadingIndicator" class="spinner" style="display:none;"></div>
         <section class="results-section">
             <div id="matchScore" class="result-block">
                 <h3>Match Score:</h3>
-                <p>85%</p>
+                <p  class="score-percent">85%</p>
             </div>
-            <div id="missingKeywords" class="result-block">
-                <h3>Missing Keywords:</h3>
-                <ul>
-                    <li>Python</li>
-                    <li>Data Pipelines</li>
-                    <li>Model Deployment</li>
-                </ul>
+            <div id="matchingSkills" class="result-block">
+                <h3>Matching Skills:</h3>
+                <div class="skills-grid">
+                    <div class="skill-tile">Matching Skill 1</div>
+                    <div class="skill-tile">Matching Skill 2</div>
+                    <div class="skill-tile">Matching Skill 3</div>
+                </div>
+            </div>
+            <div id = "missingSkills" class="result-block">
+                <h3>Missing Skills:</h3>
+                <div class="skills-grid">
+                    <div class="skill-tile">Missing Skill 1</div>
+                    <div class="skill-tile">Missing Skill 2</div>
+                    <div class="skill-tile">Missing Skill 3</div>
+                </div>
             </div>
             <div id="improvementSuggestions" class="result-block">
                 <h3>Improvement Suggestions:</h3>

@@ -4,8 +4,9 @@ import os, json
 import PyPDF2
 import docx
 import ast
-from cv_analyzer import extract_resume_info, extract_jobdesc_info
+from cv_analyzer import extract_resume_info, extract_jobdesc_info, match_skills, llm_compare_cv_to_job_description
 from utils import create_hash, check_file_exists, save_to_cache, read_from_file
+from docker.docker_postgres.postgres_code import connection_params, connect_to_db, insert_record, record_exists, print_all_records
 
 CACHE_DIR = 'doctemp'
 app = Flask(__name__)
@@ -13,6 +14,9 @@ app = Flask(__name__)
 # Configurations
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['ALLOWED_EXTENSIONS'] = {'pdf', 'doc', 'docx'}
+
+# create postgres db connection object
+conn = connect_to_db(connection_params)
 
 # Ensure upload folder exists
 if not os.path.exists(app.config['UPLOAD_FOLDER']):
@@ -67,40 +71,62 @@ def compare_cv():
     else:
         return jsonify({"error": "Invalid file format"}), 400
     
-    # check cache
-    hash_text_jd = create_hash(job_description)
-    hash_filename = hash_text_jd + '.txt'
-    filename = filename + '.txt'
+    # Check if the record already exists (resume_text_hash and jd_text_hash combination)
+    print_all_records(conn)
+    existing_record = record_exists(conn, cv_text, job_description)
+    print('########-------------\n', existing_record, '\n\n###########------------')
+    if existing_record:
+        print("Record with the same resume and job description hash already exists. Skipping insertion.")
+        llm_match_scores, resume_info , job_description_info = existing_record
 
-    if check_file_exists(CACHE_DIR, filename) and check_file_exists(CACHE_DIR, hash_filename):
-        resume_info = read_from_file(CACHE_DIR, filename).replace('json', '').replace('```', '')
-        job_description_info = read_from_file(CACHE_DIR, hash_filename).replace('json', '').replace('```', '')
     else:
-        resume_info = extract_resume_info(cv_text).replace('json', '').replace('```', '')
-        job_description_info = extract_jobdesc_info(job_description).replace('```', '')
+        print("Calling llm again for match scores, and cv/jd info extraction")
+        # llm_match_scores = llm_compare_cv_to_job_description(cv_text, job_description).replace('json', '').replace('```', '')
+        # resume_info = extract_resume_info(cv_text).replace('json', '').replace('```', '')
+        # job_description_info = extract_jobdesc_info(job_description).replace('json', '').replace('```', '')
+        # insert_record(conn, cv_text, job_description, llm_match_scores, resume_info, job_description_info)
 
-        save_to_cache(filename, resume_info, CACHE_DIR).replace('json', '')
-        save_to_cache(hash_filename, job_description_info, CACHE_DIR)
+    
+    # Create hash
 
-    print(resume_info)
-    print(job_description_info)
+    
+    # check cache
+    # hash_text_jd = create_hash(job_description)
+    # hash_filename = hash_text_jd + '.txt'
+    # filename = filename + '.txt'
+    # score_file_name = hash_filename + filename + '.txt'
+
+    # if check_file_exists(CACHE_DIR, filename) and check_file_exists(CACHE_DIR, hash_filename):
+    #     resume_info = read_from_file(CACHE_DIR, filename).replace('json', '').replace('```', '')
+    #     job_description_info = read_from_file(CACHE_DIR, hash_filename).replace('json', '').replace('```', '')
+    #     llm_match_scores = read_from_file(CACHE_DIR, score_file_name)
+    # else:
+    #     resume_info = extract_resume_info(cv_text).replace('json', '').replace('```', '')
+    #     job_description_info = extract_jobdesc_info(job_description).replace('json', '').replace('```', '')
+
+    #     save_to_cache(filename, resume_info, CACHE_DIR)
+    #     save_to_cache(hash_filename, job_description_info, CACHE_DIR)
+    #     save_to_cache(score_file_name, llm_match_scores, CACHE_DIR)
+
+    print(llm_match_scores)
 
     resume_json = json.loads(resume_info)
     jd_json = json.loads(job_description_info)
 
-    # Placeholder for integrating LLM-based logic to compare CV with JD
-    # Here you'd load the CV content, compare with job description using LLM, etc.
-    # Example dummy response:
+    # Integrating LLM-based logic to compare CV with JD
+
+    matched_skills, missing_skills = match_skills(resume_json, jd_json)
+   
     match_score = 75  # Example score
-    missing_keywords = ["Python", "Data Pipelines", "Machine Learning"]
     suggestions = "Consider adding more detail about your experience in cloud deployment and CI/CD."
 
     # Send back the response as JSON
     return jsonify({
         "match_score": match_score,
-        "missing_keywords": missing_keywords,
+        "matching_keywords": matched_skills,
+        "missing_keywords": missing_skills,
         "suggestions": suggestions
     })
-
+6464
 if __name__ == '__main__':
     app.run(debug=True)
