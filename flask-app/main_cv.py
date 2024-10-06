@@ -5,7 +5,6 @@ import PyPDF2
 import docx
 import ast
 from cv_analyzer import extract_resume_info, extract_jobdesc_info, match_skills, llm_compare_cv_to_job_description
-from utils import create_hash, check_file_exists, save_to_cache, read_from_file
 from docker.docker_postgres.postgres_code import connection_params, connect_to_db, insert_record, record_exists, print_all_records
 
 CACHE_DIR = 'doctemp'
@@ -84,28 +83,6 @@ def compare_cv():
         resume_info = extract_resume_info(cv_text).replace('json', '').replace('```', '')
         job_description_info = extract_jobdesc_info(job_description).replace('json', '').replace('```', '')
         insert_record(conn, cv_text, job_description, llm_match_scores, resume_info, job_description_info)
-
-    
-    # Create hash
-
-    
-    # check cache
-    # hash_text_jd = create_hash(job_description)
-    # hash_filename = hash_text_jd + '.txt'
-    # filename = filename + '.txt'
-    # score_file_name = hash_filename + filename + '.txt'
-
-    # if check_file_exists(CACHE_DIR, filename) and check_file_exists(CACHE_DIR, hash_filename):
-    #     resume_info = read_from_file(CACHE_DIR, filename).replace('json', '').replace('```', '')
-    #     job_description_info = read_from_file(CACHE_DIR, hash_filename).replace('json', '').replace('```', '')
-    #     llm_match_scores = read_from_file(CACHE_DIR, score_file_name)
-    # else:
-    #     resume_info = extract_resume_info(cv_text).replace('json', '').replace('```', '')
-    #     job_description_info = extract_jobdesc_info(job_description).replace('json', '').replace('```', '')
-
-    #     save_to_cache(filename, resume_info, CACHE_DIR)
-    #     save_to_cache(hash_filename, job_description_info, CACHE_DIR)
-    #     save_to_cache(score_file_name, llm_match_scores, CACHE_DIR)
 
     print('####', llm_match_scores, '####')
 
