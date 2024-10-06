@@ -94,12 +94,7 @@ def record_exists(
             cursor.execute(select_query, (resume_hash, jd_hash))
             result = cursor.fetchone()
             if result:
-                match_score_json, resume_info_json, jd_info_json = result
-                return (
-                    json.loads(match_score_json), 
-                    json.loads(resume_info_json), 
-                    json.loads(jd_info_json)
-                )
+                return result
             return None
     except Exception as e:
         print(f"Error checking for existing record: {e}")

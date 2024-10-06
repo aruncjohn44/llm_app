@@ -99,13 +99,13 @@ def llm_compare_cv_to_job_description(resume_text, job_description_text):
     You are a career matching assistant. I will provide a CV and a job description, and your task is to evaluate the similarity between them. 
     Follow these steps:
     
-    1. **Skills Match**: Compare the skills listed in the CV with those required in the job description. Are the required skills covered in the CV? Provide a match score between 0 to 1.
+    1. **Skills Match**: Compare the skills listed in the CV with those required in the job description. Are the required skills covered in the CV? Create a match score between 0 to 1.
     
-    2. **Education Match**: Compare the education requirements in the job description with the candidate's qualifications in the CV. Is the required level of education met? Provide a match score between 0 to 1.
+    2. **Education Match**: Compare the education requirements in the job description with the candidate's qualifications in the CV. Is the required level of education met? Create a match score between 0 to 1.
     
-    3. **Experience Match**: Compare the candidate's experience with the job requirements, focusing on the number of years, relevant industries, leadership experience, and specific accomplishments. Provide a match score between 0 to 1.
+    3. **Experience Match**: Compare the candidate's experience with the job requirements, focusing on the number of years, relevant industries, leadership experience, and specific accomplishments. Create a match score between 0 to 1.
     
-    4. **Overall Match**: Based on the above analysis (skills, education, and experience matches), provide an overall similarity score between 0 and 1. This score should reflect how well the CV matches the job description in all these aspects.
+    4. **Overall Match**: Based on the above analysis (skills, education, and experience matches), Create an overall similarity score between 0 and 1. This score should reflect how well the CV matches the job description in all the above aspects.
     
     ## CV: 
     {resume_text}
@@ -113,8 +113,7 @@ def llm_compare_cv_to_job_description(resume_text, job_description_text):
     ## Job Description: 
     {job_description_text}
 
-    Now, please perform the evaluation and provide a breakdown for each category along with the final match score.
-    Provide the values in a STRICTLY JSON format as shown below
+    Now, please perform the above mentioned evaluations and provide the created values in a STRICTLY JSON format as shown below
 
     ## Output
 

@@ -74,17 +74,16 @@ def compare_cv():
     # Check if the record already exists (resume_text_hash and jd_text_hash combination)
     print_all_records(conn)
     existing_record = record_exists(conn, cv_text, job_description)
-    print('########-------------\n', existing_record, '\n\n###########------------')
     if existing_record:
         print("Record with the same resume and job description hash already exists. Skipping insertion.")
         llm_match_scores, resume_info , job_description_info = existing_record
 
     else:
         print("Calling llm again for match scores, and cv/jd info extraction")
-        # llm_match_scores = llm_compare_cv_to_job_description(cv_text, job_description).replace('json', '').replace('```', '')
-        # resume_info = extract_resume_info(cv_text).replace('json', '').replace('```', '')
-        # job_description_info = extract_jobdesc_info(job_description).replace('json', '').replace('```', '')
-        # insert_record(conn, cv_text, job_description, llm_match_scores, resume_info, job_description_info)
+        llm_match_scores = llm_compare_cv_to_job_description(cv_text, job_description).replace('json', '').replace('```', '')
+        resume_info = extract_resume_info(cv_text).replace('json', '').replace('```', '')
+        job_description_info = extract_jobdesc_info(job_description).replace('json', '').replace('```', '')
+        insert_record(conn, cv_text, job_description, llm_match_scores, resume_info, job_description_info)
 
     
     # Create hash
@@ -108,8 +107,9 @@ def compare_cv():
     #     save_to_cache(hash_filename, job_description_info, CACHE_DIR)
     #     save_to_cache(score_file_name, llm_match_scores, CACHE_DIR)
 
-    print(llm_match_scores)
+    print('####', llm_match_scores, '####')
 
+    match_scores = json.loads(llm_match_scores)
     resume_json = json.loads(resume_info)
     jd_json = json.loads(job_description_info)
 
@@ -117,12 +117,11 @@ def compare_cv():
 
     matched_skills, missing_skills = match_skills(resume_json, jd_json)
    
-    match_score = 75  # Example score
     suggestions = "Consider adding more detail about your experience in cloud deployment and CI/CD."
 
     # Send back the response as JSON
     return jsonify({
-        "match_score": match_score,
+        "match_scores": match_scores,
         "matching_keywords": matched_skills,
         "missing_keywords": missing_skills,
         "suggestions": suggestions
