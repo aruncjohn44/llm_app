@@ -1,7 +1,0 @@
-{
-    "required skills": ["designing and implementing LLM models", "AI / ML", "open-source embedding models", "spacy", "NER models"],
-    "required tools": ["AWS platform", "bedrock", "sage maker"],
-    "education details": ["Bachelor’s degree in Computer Science", "Bachelor’s degree in Software engineering", "Bachelor’s degree in a related field"],
-    "required experience": ["lead developer", "implementing LLM models", "experience in AI / ML", "preferred experience in open-source embedding models"],
-    "certifications": []
-}
