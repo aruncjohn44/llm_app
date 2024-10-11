@@ -170,12 +170,22 @@ footer {
     align-items: center;
     justify-content: center;
     margin: 20px auto; /* Center it within the container */
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    /* Adding a layered 3D shadow effect */
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3), inset -2px -2px 5px rgba(255, 255, 255, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Add a slight 3D transform */
+    transform: perspective(500px) rotateX(10deg);
 }
+
 
 .overall-score-percent:hover {
     background-color: #00796b;
     color: #fff;
+    
+    /* Make the shadow more pronounced on hover */
+    transform: perspective(500px) rotateX(0deg) scale(1.1); /* Add a hover scaling and flattening effect */
+    box-shadow: 5px 5px 25px rgba(0, 0, 0, 0.4), inset -2px -2px 5px rgba(255, 255, 255, 0.7);
+
 }
 
 /* Layout for the match detail tiles */
