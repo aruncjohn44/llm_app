@@ -2,12 +2,26 @@ import os
 import pdfkit
 import logging
 from flask import Flask, request, send_file, jsonify
+import platform
 
 # Initialize the Flask app
 app = Flask(__name__)
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def detect_os():
+    os_name = platform.system()
+    
+    if os_name == "Windows":
+        print("The environment is Windows.")
+        return "Windows"
+    elif os_name == "Linux":
+        print("The environment is Linux.")
+        return "Linux"
+    else:
+        print(f"Unknown environment: {os_name}")
+        return os_name
 
 def configure_pdfkit(path_to_wkhtmltopdf):
     """Configure pdfkit with the path to the wkhtmltopdf executable."""
@@ -43,8 +57,12 @@ def generate_pdf():
     input_html = data['html']
     
     # Set the path to the wkhtmltopdf executable
-    path_to_wkhtmltopdf = 'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'  # Update this with your actual path
+    os_name = detect_os()
 
+    if os_name == "Windows":
+        path_to_wkhtmltopdf = 'C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe'  # Update this with your actual path
+    elif os_name == "Linux":
+        path_to_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
     # Configure pdfkit
     pdfkit_config = configure_pdfkit(path_to_wkhtmltopdf)
 
