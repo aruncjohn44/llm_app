@@ -25,6 +25,13 @@ def convert_html_to_pdf(input_html, output_pdf, pdfkit_config):
         logging.error(f"Failed to convert HTML to {output_pdf}: {e}")
         raise
 
+
+# Health check route
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "Running"}), 200
+
+
 @app.route('/generate-pdf', methods=['POST'])
 def generate_pdf():
     """API endpoint to generate PDF from HTML."""
@@ -52,4 +59,4 @@ def generate_pdf():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(port=6000)
+    app.run(port=6000, host='0.0.0.0')
