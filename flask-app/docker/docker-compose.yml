@@ -1,6 +1,21 @@
 version: '3.8'
 
 services:
+  flask_app:
+    build:
+      context: ./docker_cv_builder_agent  # Path to the folder where the Dockerfile is located
+    container_name: flask_app
+    restart: always
+    ports:
+      - "6000:6000"
+    depends_on:
+      - postgres
+    environment:
+      - PYTHONDONTWRITEBYTECODE=1
+      - FLASK_ENV=development
+    volumes:
+      - ./docker_cv_builder_agent:/app  # Map the docker_cv_builder_agent directory to /app
+  
   postgres:
     image: postgres:latest
     container_name: postgres_db
@@ -13,6 +28,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-      
+
 volumes:
   postgres_data:
