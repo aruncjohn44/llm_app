@@ -28,7 +28,7 @@
         </section>
 
         <div id="loadingIndicator" class="spinner" style="display:none;"></div>
-        <section class="results-section">
+        <section class="results-section blur-section">
             <div id="matchScore" class="result-block">
                 <h3>Overall match Score:</h3>
                 <p  class="overall-score-percent">85%</p>
@@ -54,8 +54,36 @@
                 <p>Consider emphasizing your experience with deploying machine learning models and cloud technologies like AWS or Azure.</p>
             </div>
         </section>
+        
+        <section class="input-section resume-generation-section">
+            <h2>Generate a Custom Resume</h2>
+            <p>Customize your resume based on your job application by adding or modifying the following fields:</p>
+            <form id="resumeForm">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="contactInfo">Contact Information</label>
+                    <input type="text" id="contactInfo" name="contactInfo" placeholder="Enter your email or phone number">
+                </div>
+                <div class="form-group">
+                    <label for="customSummary">Professional Summary</label>
+                    <textarea id="customSummary" name="customSummary" rows="4" placeholder="Write a brief professional summary"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="skills">Additional Skills</label>
+                    <input type="text" id="skills" name="skills" placeholder="List additional skills (comma separated)">
+                </div>
+                <div class="form-group">
+                    <label for="experience">Custom Experience</label>
+                    <textarea id="experience" name="experience" rows="4" placeholder="Add specific work experience relevant to the job"></textarea>
+                </div>
+                <button id="generateResumeBtn">Generate Custom Resume</button>
+            </form>
+        </section>
     </div>
-
+    
     <footer>
         <p>&copy; 2024 CV Matcher App</p>
     </footer>

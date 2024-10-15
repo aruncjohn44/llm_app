@@ -1,5 +1,6 @@
 
 const loadingIndicator = document.getElementById('loadingIndicator'); 
+const blurSection = document.querySelector('.blur-section');
 
 // Show the loading indicator before sending the request
 loadingIndicator.style.display = 'none';
@@ -22,6 +23,8 @@ document.getElementById('submitBtn').addEventListener('click', function() {
 
     // Show the loading indicator before sending the request
     loadingIndicator.style.display = 'block'; // Show the loading indicator
+    blurSection.classList.add('blur-background');
+
 
     // Send an AJAX request to the Flask backend
     fetch('/compare_cv', {
@@ -33,6 +36,7 @@ document.getElementById('submitBtn').addEventListener('click', function() {
 
         // Hide the loading indicator when the response is received
         loadingIndicator.style.display = 'none';
+        blurSection.classList.remove('blur-background');
         scores = data.match_scores;
         // Display results from the backend
         document.getElementById('matchScore').querySelector('p').innerText = scores["overall match"] + '%';

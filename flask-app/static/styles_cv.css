@@ -122,6 +122,7 @@ footer {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* Centering the spinner */
+    z-index: 1001;
   }
   
   /* Keyframe animation for the rotation */
@@ -130,11 +131,16 @@ footer {
     100% { transform: rotate(360deg); }
   }
 
+/* Apply this class to blur the background */
+.blur-background {
+    filter: blur(2px); /* Blur the background */
+    pointer-events: none; /* Prevent interaction with the background during loading */
+  }
 
 
 .skills-grid {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;    
     gap: 10px;
 }
 
@@ -216,4 +222,67 @@ footer {
 .match-tile:hover {
     background-color: #00796b;
     color: #fff;
+}
+
+
+/* Resume Generation Section */
+.resume-generation-section {
+    margin: 20px 0; /* Matching the input-section and results-section */
+    padding: 20px; /* Consistent padding */
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Ensure the section is not wider than the container */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.resume-generation-section h2 {
+    font-size: 28px;
+    color: #4a90e2;
+    margin-bottom: 20px;
+}
+
+.resume-generation-section p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.resume-generation-section .form-group {
+    margin-bottom: 20px;
+}
+
+.resume-generation-section input[type="text"], 
+.resume-generation-section textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.resume-generation-section button {
+    background-color: #4a90e2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.resume-generation-section button:hover {
+    background-color: #357ABD;
+}
+
+/* Ensures the new section blends seamlessly */
+.resume-generation-section input[type="text"]:hover, 
+.resume-generation-section textarea:hover {
+    border-color: #4a90e2;
+}
+
+.resume-generation-section textarea {
+    resize: none;
 }
