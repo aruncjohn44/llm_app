@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arun C John - Resume</title>
+    <title>{{ name }} - Resume</title>
     <style> 
         body {
             font-family: Calibri, sans-serif;
@@ -22,142 +22,74 @@
     </style>
 </head>
 <body style="margin: 10px;">
-    <h2 style="display: inline-block; margin-right: 20px; margin-bottom: 2px;">ARUN C JOHN</h2>
-    <p style="display: inline; margin: 0; padding: 0;">Email: <a href="mailto:aruncjohn@gmail.com" class="title_row_margin">aruncjohn@gmail.com</a> | 
-    <a href="https://www.linkedin.com/in/aruncjds/" class="title_row_margin">LinkedIn</a> |   
-    <a href="https://aruncjohn44.github.io/cv_new/" class="title_row_margin">Personal Website</a> |   
-    +1 587 984 1916</p>
+    <h2 style="display: inline-block; margin-right: 20px; margin-bottom: 2px;">{{ name }}</h2>
+    <p style="display: inline; margin: 0; padding: 0;">Email: <a href="mailto:{{ email }}" class="title_row_margin">{{ email }}</a> | 
+    <a href="{{ linkedin_url }}" class="title_row_margin">LinkedIn</a> |   
+    <a href="{{ personal_website }}" class="title_row_margin">Personal Website</a> |   
+    {{ phone }}</p>
     <hr style="border: 1px solid black; margin-top: 1px;">
 
     <h3 style="margin-bottom: 5px;">PROFESSIONAL SUMMARY</h3>
-    <p style="margin-top: 5px;">Seasoned AI/Machine Learning Specialist and Leader with a decade-long track record crafting and implementing intricate, cutting-edge machine learning solutions spanning across Python, Generative AI, NLP, computer vision, and deep learning. Proficient in harnessing the power of AWS/Azure Cloud Services and well-versed in AI Strategy, program management, research, MLOps.</p>
+    <p style="margin-top: 5px;">{{ professional_summary }}</p>
 
     <h3 style="margin-bottom: 5px;">TECHNICAL EXPERTISE</h3>
     <table>
+        {% for skill_row in technical_expertise %}
         <tr>
-            <td class="table_pad">• Data Science & Machine Learning</td>
-            <td>• NLP, LLMs, Generative AI</td>
+            {% for skill in skill_row %}
+            <td class="table_pad">• {{ skill }}</td>
+            {% endfor %}
         </tr>
-        <tr>
-            <td class="table_pad">• MLOps - AWS/Azure/Snowflake</td>
-            <td>• AI Strategy & Consulting</td>
-        </tr>
-        <tr>
-            <td class="table_pad">• Program & Stakeholder Management</td>
-            <td>• AI/ML Research & Product Development</td>
-        </tr>
+        {% endfor %}
     </table>
+
     <h3>DOMAIN EXPERTISE</h3>
     <table>
         <tr>
-            <td class="table_pad">• FS & Insurance</td>
-            <td class="table_pad">• Oil & Gas</td>
-            <td>• Automotive</td>
+            {% for domain in domain_expertise %}
+            <td class="table_pad">• {{ domain }}</td>
+            {% endfor %}
         </tr>
     </table>    
 
     <h3 style="margin-bottom: 5px;">PROFESSIONAL EXPERIENCE</h3>
+    {% for experience in experiences %}
     <table width="100%" style="border-collapse: collapse;">
         <tr>
             <td style="padding: 0; margin: 0; line-height: 1;">
                 <h3 style="display: inline; font-size: inherit; margin: 0;">
-                    <a href="https://www.chainml.net/">Sr AI Solutions Engineer - ChainML Canada Inc.</a>
+                    <a href="{{ experience.company_url }}">{{ experience.title }} - {{ experience.company }}</a>
                 </h3>
             </td>
             <td style="text-align: right; padding: 0; margin: 0; line-height: 1;">
-                <h3 style="display: inline; font-size: inherit; margin: 0;">(Feb 2024 - May 2024)</h3>
+                <h3 style="display: inline; font-size: inherit; margin: 0;">({{ experience.start_date }} - {{ experience.end_date }})</h3>
             </td>
         </tr>
     </table>
-    <p style="margin: 2px;"><em>ChainML specializes in AI research and development in Blockchain & Web 3.0, focusing on the creation of AI agents. They offer Council Analytics, a Generative AI platform for conversational analytics via API, and are developing a Web3 AI Agent Protocol to enable decentralized, secure AI services.</em></p>
+    <p style="margin: 2px;"><em>{{ experience.description }}</em></p>
     <ul style="margin-top: 2px; margin-bottom: 10px; padding-left: 30px; text-align: justify;">
-        <li><strong>Leading</strong> the design and architecture of custom machine learning solutions, serving as the Principal Liaison between R&D, Engineering, and client teams. Successfully navigated the complexities of integrating ML/AI solutions to 2 client environments (PoC, Production use cases).</li>
-        <li><strong>Developed & Deployed </strong> Generative AILLM-powered agents using OpenAI, Claude integrated with in-house agentic framework, LangChain, LlamaIndex, pytorch, and scalable MLOps, building a conversational analytics engine.</li>
+        {% for bullet in experience.bullets %}
+        <li>{{ bullet }}</li>
+        {% endfor %}
     </ul>
-    <table width="100%" style="border-collapse: collapse;">
-        <tr>
-            <td style="padding: 0; margin: 0; line-height: 1;">
-                <h3 style="display: inline; font-size: inherit; margin: 0;">
-                    <a href="https://www.accenture.com/in-en/"> Principal Data Scientist - Accenture Strategy & Consulting</a>
-                </h3>
-            </td>
-            <td style="text-align: right; padding: 0; margin: 0; line-height: 1;">
-                <h3 style="display: inline; font-size: inherit; margin: 0;">(Nov 2020 – Feb 2024)</h3>
-            </td>
-        </tr>
-    </table>
-    <p style="margin: 2px;"><em>Steered a talented team of 6+ Data Scientists, ML Engineers, UI developers at Accenture within the
-        Strategy & Consulting division. Responsible for orchestrating the creation and delivery of high-impact ML/AI solutions,
-        infrastructure, catalyzing enterprise reinvention and data-driven decision-making for multiple clients.</em></p>
-    <ul style="margin-top: 2px; padding-left: 30px; text-align: justify;">
-        <li><strong>Spearheaded</strong> AI-driven solutions, streamlining decision-making and enhancing operational efficiency for businesses.</li>
-        <li><strong>Strategic guidance and leadership:</strong> Identified and evaluated opportunities for leveraging AI/ML, resulting in
-            practical solutions that empowered Industry practitioners to adopt optimal solutions.</li>
-        <li><strong>Built and managed</strong> a high-performing team of 6+ Data Scientists and machine learning experts, ensuring delivery of high-impact ML/AI solutions.</li>
-        <li><strong>Generative AI:</strong> Pioneered the organizational drive towards rapid adoption of cutting-edge Generative AI/LLMs like
-            Open AI GPT3/4, Anthropic Claude, Bedrock APIs, RAG systems and so on.</li>
-        <li><strong>Data Science & MLOps:</strong> Developed & productionalized multiple end to end AI driven solutions for Global Insurance
-            Majors. techstack - Python,pytorch/Tensorflow, Classic & Gen AI, OCR & RAG and other tools such as Flask REST API
-            & JavaScript-React JS UI, docker & Kubernetes in cloud (AWS) ecosystem, model tracking using MLFlow and so on.
-            Ensured a 50% better fraud capture rate and multi fold reduction in processing times with $2 million+ a year
-            estimated savings
-            .</li>
-    </ul>
-    <table width="100%" style="border-collapse: collapse;">
-        <tr>
-            <td style="padding: 0; margin: 0; line-height: 1;">
-                <h3 style="display: inline; font-size: inherit; margin: 0;">
-                    <a href="https://corporate.exxonmobil.com/">Computational Data Scientist - ExxonMobil</a>
-                </h3>
-            </td>
-            <td style="text-align: right; padding: 0; margin: 0; line-height: 1;">
-                <h3 style="display: inline; font-size: inherit; margin: 0;">(Dec 2017 – Nov 2020)</h3>
-            </td>
-        </tr>
-    </table>
-    <p style="margin: 2px;"><em>Instrumental in developing computational & data driven methods to solve complex upstream Oil & Gas problems.
-        Primarily involved in developing & designing Data & AI driven solutions to deliver business value</em></p>
-    <ul style="margin-bottom: 15px; margin-top: 5px; padding-left: 30px; text-align: justify;">
-        <li><strong>Machine Learning & NLP:</strong> Ideated, developed and deployed a comprehensive log text classification system using
-            RNN - Bi-LSTMS for an Oil rig maintenance log classification, driving advancements in predictive
-            maintenance strategies, saving $1.5 million over three years.</li>
-        <li><strong>Led</strong> advanced reservoir data analytics and visualization strategies for unconventional projects.</li>
-        <li><strong> IoT, Analytics & Visualization:</strong>Spearheaded the development and execution of advanced reservoir data analytics
-            and visualization strategies, Well scheduling analysis (IoT) for unconventional projects</li>
-    </ul>
-    <table width="100%" style="border-collapse: collapse;">
-        <tr>
-            <td style="padding: 0; margin: 0; line-height: 1;">
-                <h3 style="display: inline; font-size: inherit; margin: 0;">
-                    <a href="https://www.mercedes-benz.com/en/">CAE Research Analyst - Mercedes Benz</a>
-                </h3>
-            </td>
-            <td style="text-align: right; padding: 0; margin: 0; line-height: 1;">
-                <h3 style="display: inline; font-size: inherit; margin: 0;">(Jul 2013 – Dec 2017)</h3>
-            </td>
-        </tr>
-    </table>
-    <ul style="margin-bottom: 15px; margin-top: 5px; padding-left: 30px; text-align: justify;">
-        <li>Developed and implemented machine learning and statistical models for HVAC systems, Assisting HVAC system design, CFD/1D simulations, assisting design and fluid flow classifications.</li>
-    </ul>
+    {% endfor %}
 
     <h3  style="margin-bottom: 5px;">FREELANCING</h3>
-    <p style="margin-top: 5px;"><strong><a href = "https://neptune.ai/blog"> Neptune AI –</a>Technical Content Writer:</strong> Created content on machine learning, MLOps, and computer vision.</p>
+    <p style="margin-top: 5px;"><strong><a href = "{{ freelancing_url }}">{{ freelancing_title }} –</a>{{ freelancing_role }}</strong></p>
 
     <h3 style="margin-bottom: 5px;">KNOWLEDGE PURVIEW</h3>
-    <p style="margin-top: 5px; text-align: justify;">Machine learning, big data, Spark, ML architecture, Deep Learning, BERT, BART, Open AI-GPT & word Embeddings,
-        RNNs based NLP(Natural Language processing) algorithms, feature engineering, Computer Vision & OCR, Classic ML models like Regression/classification Models - Linear & Ensemble based methods like Random Forest, XGBoost, sklearn, KNN, SVM, clustering and complex models like Transfer learning, MLOPs tools -MLflow, Docker, Apache Airflow, DAGs, Weights & biases, PySpark, Databricks etc.
-        Python, Numpy, Pandas, Scipy, Scikit-Learn, Pytorch, Tensorflow, web development - Flask API, GitHub, Linux, JavaScript, Node.js, React JS, Databricks, Azure, Kubernetes, AWS suite of services like AWS Lambda, EC2, ECR,S3.
-        Data engineering & ML pipelines, statistical modeling, Project Management, ETL, Expertise with SQL/PostgreSQL/SnowFlake, Agile, no-SQL databases-MongoDB, Cloud technologies, DevOps, IoT, Testing and so on</p>
+    <p style="margin-top: 5px; text-align: justify;">{{ knowledge_purview }}</p>
+
     <h3 style="margin-bottom: 5px;">EDUCATION</h3>
-    <p style="margin-top: 5px; margin-bottom: 5px;"><strong>M.Tech in Thermal & Fluids Engineering</strong> - National Institute of Technology, Karnataka, India (2014) - GPA: 7.4</p>
-    <p style="margin-top: 5px;"><strong>B.Tech in Mechanical Engineering</strong> - Govt. Engineering College, Thrissur, India (2011) - GPA: 7.3</p>
+    {% for education in education_details %}
+    <p style="margin-top: 5px; margin-bottom: 5px;"><strong>{{ education.degree }}</strong> - {{ education.institution }} ({{ education.year }}) - GPA: {{ education.gpa }}</p>
+    {% endfor %}
 
     <h2>ARTICLES/PUBLICATIONS</h2>
     <ul style="margin-bottom: 15px; margin-top: 5px; padding-left: 30px; text-align: justify;">
-        <li><a href="https://medium.com/@aruncjohn/local-large-language-models-llms-for-natural-language-processing-nlp-tasks-b580db9a206b">Local Large Language Models (LLMs) for Natural Language Processing (NLP) Tasks</a></li>
-        <li><a href="https://neptune.ai/blog/deploying-computer-vision-models">Deploying Computer Vision Models: Tools & Best Practices</a></li>
-        <li><a href="https://medium.com/@aruncjohn/optimizers-in-machine-learning-a3e40a83686d">Popular Optimization Algorithms in Machine Learning - A brief walkthrough</a></li>
+        {% for publication in publications %}
+        <li><a href="{{ publication.url }}">{{ publication.title }}</a></li>
+        {% endfor %}
     </ul>
 </body>
 </html>

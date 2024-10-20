@@ -6,6 +6,9 @@ from jinja2 import Environment, FileSystemLoader
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 
+
+os.chdir('flask-app\llm_html_writer')
+
 class CVGenerator:
     def __init__(self, template_dir: str, template_name: str):
         self.template_dir = template_dir
@@ -44,38 +47,7 @@ if __name__ == "__main__":
 
     # Data to fill in the template
     custom_data = {
-        'name': 'Arun C John',
-        'email': 'aruncjohn@gmail.com',
-        'phone': '+1-234-567-890',
-        'summary': 'Seasoned AI/ML Specialist with over 15 years of experience...',
-        'experience': [
-            {
-                'job_title': 'AI Solutions Lead',
-                'company': 'ChainML Canada Inc.',
-                'years': '2022 - Present',
-                'description': 'Leading AI initiatives, including GenAI pipeline development and automation...'
-            },
-            {
-                'job_title': 'Principal Scientist',
-                'company': 'Accenture Strategy & Consulting',
-                'years': '2019 - 2022',
-                'description': 'Delivered high-impact AI solutions in insurance, enhancing the claims process...'
-            }
-        ],
-        'education': [
-            {
-                'degree': 'Master of Science in Computer Science',
-                'school': 'University of Toronto',
-                'years': '2010 - 2012'
-            },
-            {
-                'degree': 'Bachelor of Engineering in Mechanical Engineering',
-                'school': 'University of Mumbai',
-                'years': '2005 - 2009'
-            }
-        ],
-        'skills': ['Python', 'Machine Learning', 'Deep Learning', 'NLP', 'Cloud Services (AWS/Azure)', 'MLOps'],
-        'certifications': ['AWS Certified Solutions Architect', 'Azure Data Scientist'],
+        'professional_summary '
     }
 
     # Output file
